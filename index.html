@@ -168,10 +168,6 @@
                     </select>
                 </div>
                 <button onclick="planRoute()">开始导航</button>
-                <div class="route-info">
-                    <div>距离：<span id="distance">-</span></div>
-                    <div>时间：<span id="duration">-</span></div>
-                </div>
                 <div class="result" id="outdoorResult"></div>
             </div>
         </div>
@@ -351,17 +347,9 @@
             onSearchComplete: function(results) {
                 if (walking.getStatus() === BMAP_STATUS_SUCCESS) {
                     const plan = results.getPlan(0);
-                    document.getElementById('distance').textContent =
-                        (plan.getDistance() / 1000).toFixed(1) + '公里';
-                    document.getElementById('duration').textContent =
-                        Math.ceil(plan.getDuration() / 60) + '分钟';
-
                     // 显示路线描述
-                    let routeText = `从${start}到${end}的步行路线：\n`;
-                    const steps = plan.getRoute(0).getPath();
-                    steps.forEach((step, index) => {
-                        routeText += `${index + 1}. 经度: ${step.lng.toFixed(6)}, 纬度: ${step.lat.toFixed(6)}\n`;
-                    });
+                    let routeText = `从${start}到${end}的步行路线：已经生成\n`;
+
                     resultDiv.textContent = routeText;
                 } else {
                     document.getElementById('distance').textContent = '-';
